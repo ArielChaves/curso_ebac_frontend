@@ -1,14 +1,9 @@
-// Importa os estilos específicos do componente Cabecalho
-import styles from './Cabecalho.module.css'
+import Cabecalho from './Styles'
 
-// Define o componente Cabecalho como uma função arrow
-// Retorna o elemento de cabeçalho que usa a classe 'cabecalho' definida nos estilos importados
-const Cabecalho = () => (
-  <header className={styles.cabecalho}>
-    {/* Define o título do cabeçalho como "EBAC Jobs" */}
+const Header = () => (
+  <Cabecalho>
     <h1>EBAC Jobs</h1>
-  </header>
+  </Cabecalho>
 )
 
-// Exporta o componente Cabecalho para ser usado em outros arquivos
-export default Cabecalho
+export default Header
