@@ -1,18 +1,14 @@
-// Importa os estilos específicos do componente Hero
-import styles from './Hero.module.css'
+import React from 'react'
+import { Form, HeroTitle } from './Styles' // Corrigindo a importação
 
-// Define o componente Hero como uma função arrow
 const Hero = () => (
-  // Retorna o elemento da seção para representar o banner
-  <section className={styles.form}>
+  <Form>
     <div className="container">
-      {/* Utiliza um elemento h1 para exibir o título principal */}
-      <h2 className={styles.heroTitle}>
+      <HeroTitle>
         As melhores vagas para tecnologia, design e artes visuais.
-      </h2>
+      </HeroTitle>
     </div>
-  </section>
+  </Form>
 )
 
-// Exporta o componente Hero para ser usado em outros arquivos
 export default Hero
