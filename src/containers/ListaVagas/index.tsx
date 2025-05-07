@@ -1,11 +1,8 @@
-// Importando as dependências necessárias
 import { useState } from 'react'
 import FormVagas from '../../components/FormVagas'
 import Vaga from '../../components/Vaga'
-import styles from './ListaVagas.module.css'
 
-// Definindo o tipo de vaga
-type VagaType = {
+type VagaProps = {
   id: string
   titulo: string
   localizacao: string
@@ -16,8 +13,7 @@ type VagaType = {
   requisitos: string[]
 }
 
-// Lista inicial de vagas
-const vagas: VagaType[] = [
+const vagas: VagaProps[] = [
   {
     id: '1',
     titulo: 'Desenvolvedor front-end',
@@ -90,45 +86,27 @@ const vagas: VagaType[] = [
   }
 ]
 
-// Componente principal para listar as vagas
 const ListaVagas = () => {
-  // Estado para armazenar o filtro atual
   const [filtro, setFiltro] = useState<string>('')
 
-  // Filtrando as vagas de acordo com o termo de busca
-  const vagasFiltradas = vagas.filter((vaga) => {
-    const termoBusca = filtro.toLocaleLowerCase()
-    return (
-      // Verificando se o termo de busca está presente em qualquer parte da vaga
-      vaga.titulo.toLocaleLowerCase().includes(termoBusca) ||
-      vaga.localizacao.toLocaleLowerCase().includes(termoBusca) ||
-      vaga.nivel.toLocaleLowerCase().includes(termoBusca) ||
-      vaga.modalidade.toLocaleLowerCase().includes(termoBusca) ||
-      vaga.requisitos.some((requisito) =>
-        requisito.toLocaleLowerCase().includes(termoBusca)
-      ) ||
-      vaga.salarioMin.toString().includes(termoBusca) ||
-      vaga.salarioMax.toString().includes(termoBusca)
-    )
-  })
+  const vagasFiltradas = vagas.filter(
+    (vaga) => vaga.titulo.toLowerCase().includes(filtro.toLowerCase()) // Modificado para "includes" que é mais direto
+  )
 
   return (
     <div>
-      {/* Renderizando o formulário para pesquisa */}
       <FormVagas aoPesquisar={(termo: string) => setFiltro(termo)} />
-
-      {/* Listando as vagas filtradas */}
-      <ul className={styles.vagas}>
-        {vagasFiltradas.map((vag) => (
+      <ul>
+        {vagasFiltradas.map((vaga) => (
           <Vaga
-            key={vag.id}
-            titulo={vag.titulo}
-            localizacao={vag.localizacao}
-            nivel={vag.nivel}
-            modalidade={vag.modalidade}
-            salarioMin={vag.salarioMin}
-            salarioMax={vag.salarioMax}
-            requisitos={vag.requisitos}
+            key={vaga.id}
+            titulo={vaga.titulo}
+            localizacao={vaga.localizacao}
+            nivel={vaga.nivel}
+            modalidade={vaga.modalidade}
+            salarioMin={vaga.salarioMin}
+            salarioMax={vaga.salarioMax}
+            requisitos={vaga.requisitos}
           />
         ))}
       </ul>
@@ -136,5 +114,4 @@ const ListaVagas = () => {
   )
 }
 
-// Exportando o componente
 export default ListaVagas
